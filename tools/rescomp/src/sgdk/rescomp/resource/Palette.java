@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import sgdk.tool.ArrayUtil;
 import sgdk.rescomp.Resource;
 import sgdk.rescomp.tool.Util;
 import sgdk.rescomp.type.Basics.Compression;
@@ -31,6 +32,12 @@ public class Palette extends Resource
         {
             // get palette raw data
             palette = ImageUtil.getRGBA4444PaletteFromPALFile(file, 0x0EEE);
+        }
+        // BIN PAL file ?, OLD PALETTE
+        else if (FileUtil.getFileExtension(file, false).equalsIgnoreCase("bin"))
+        {
+            // get palette raw data
+        	palette = ArrayUtil.byteToShort(Util.in(file));
         }
         else
         {
